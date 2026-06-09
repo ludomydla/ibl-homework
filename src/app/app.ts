@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { WeatherBriefingForm } from './weather-briefing-form/weather-briefing-form';
+import { WeatherBriefingForm } from './components/weather-briefing-form/weather-briefing-form';
 
 @Component({
   selector: 'app-root',
