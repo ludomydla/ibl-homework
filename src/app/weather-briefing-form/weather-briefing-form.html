@@ -1,0 +1,22 @@
+<form class="text-3xl flex flex-col">
+    <fieldset>
+        <legend>Message types</legend>
+
+        <input type="checkbox" name="reportTypes" id="metar" value="METAR">
+        <label for="metar">METAR</label>
+
+        <input type="checkbox" name="reportTypes" id="sigmet" value="SIGMET">
+        <label for="sigmet">SIGMET</label>
+
+        <input type="checkbox" name="reportTypes" id="taf" value="TAF_LONGTAF">
+        <label for="taf">TAF</label>
+    </fieldset>
+    
+    <label for="stations">Airports:</label>
+    <input type="text" name="stations" id="stations">
+
+    <label for="countries">Countries:</label>
+    <input type="text" name="countries" id="countries">
+
+    <button type="submit">Submit</button>
+</form>

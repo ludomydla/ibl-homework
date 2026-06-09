@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { WeatherBriefingForm } from './weather-briefing-form/weather-briefing-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, WeatherBriefingForm],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
