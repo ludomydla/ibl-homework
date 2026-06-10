@@ -1,5 +1,8 @@
 <main>
     <weather-briefing-form />
+    @if (weatherBriefingResults(); as result) {
+        <results-table [responseData]="result" />
+    }
 </main>
 
 <router-outlet />

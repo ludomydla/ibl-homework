@@ -16,3 +16,21 @@ export type BriefingRequest = {
     method: string,
     params: BriefingParams[];
 }
+
+export type BriefingResponseResultItem = {
+    placeId: string,
+    queryType: ReportType,
+    receptionTime: Date,
+    reportTime: Date,
+    reportType: string,
+    revision?: string,
+    stationId: string,
+    text: string,
+    textHTML: string
+}
+
+export type BriefingResponse = {
+  error: unknown | null,
+  id: string,
+  result: BriefingResponseResultItem[],
+}

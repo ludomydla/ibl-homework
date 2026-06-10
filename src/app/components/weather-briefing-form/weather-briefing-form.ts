@@ -41,9 +41,9 @@ export class WeatherBriefingForm {
               countries: formValue.countries.split(' ')
             }
           ]
-        }
-        const result = await this.weatherBriefing.getBriefing(payload);
-        console.log('result', result);
+        };
+        
+        this.weatherBriefing.getBriefing(payload);
       }
     }
   });
