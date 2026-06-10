@@ -1,12 +1,14 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { BriefingResponse } from '../../services/weather-briefing.api';
-import { JsonPipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { transformWeatherBriefingRespToTabular } from './transform';
 
 @Component({
   selector: 'results-table',
-  imports: [JsonPipe],
+  imports: [DatePipe],
   templateUrl: './results-table.html',
 })
 export class ResultsTable {
   responseData = input.required<BriefingResponse>();
+  tabularData = computed( () => transformWeatherBriefingRespToTabular(this.responseData()));
 }

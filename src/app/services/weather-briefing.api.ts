@@ -17,16 +17,42 @@ export type BriefingRequest = {
     params: BriefingParams[];
 }
 
-export type BriefingResponseResultItem = {
-    placeId: string,
+export type BriefingResponseResultItemBase = {
     queryType: ReportType,
     receptionTime: Date,
+    refs: string[],
     reportTime: Date,
-    reportType: string,
-    revision?: string,
-    stationId: string,
-    text: string,
-    textHTML?: string
+    reportType: string;
+    stationId: string;
+    text: string;
+}
+
+export type BriefingResponseResultItemSIGMET = BriefingResponseResultItemBase & {
+    validFrom: Date,
+    validTo: Date,
+}
+
+export type BriefingResponseResultItemTAF = BriefingResponseResultItemSIGMET & {
+    placeId: string;
+    revision?: string;
+    textHTML: string;
+}
+
+export type BriefingResponseResultItemMETAR = BriefingResponseResultItemBase & {
+    placeId: string;
+    revision: string;
+    textHTML: string;
+}
+
+export type BriefingResponseResultItem = BriefingResponseResultItemSIGMET | BriefingResponseResultItemTAF | BriefingResponseResultItemMETAR;
+
+type Token = {
+    tag: string;
+    text: string;
+    class: string;
+}
+export type ExtendedBriefingResponseResultItem = BriefingResponseResultItem & {
+    tokens: Token[];
 }
 
 export type BriefingResponseError = {
@@ -38,5 +64,5 @@ export type BriefingResponseError = {
 export type BriefingResponse = {
   error: BriefingResponseError | null,
   id: string,
-  result: BriefingResponseResultItem[],
+  result: Array<BriefingResponseResultItem>,
 }

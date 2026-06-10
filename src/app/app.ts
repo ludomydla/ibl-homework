@@ -1,7 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WeatherBriefingForm } from './components/weather-briefing-form/weather-briefing-form';
-import { BriefingResponse } from './services/weather-briefing.api';
 import { ResultsTable } from './components/results-table/results-table';
 import { WeatherBriefingService } from './services/weather-briefing';
 
@@ -15,5 +14,4 @@ export class App {
   protected readonly title = signal('ibl-homework');
   private briefingService = inject(WeatherBriefingService);
   weatherBriefingResults = this.briefingService.responseData;
-
 }
