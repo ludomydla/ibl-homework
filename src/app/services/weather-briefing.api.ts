@@ -26,11 +26,17 @@ export type BriefingResponseResultItem = {
     revision?: string,
     stationId: string,
     text: string,
-    textHTML: string
+    textHTML?: string
+}
+
+export type BriefingResponseError = {
+    code: number,
+    data?: unknown
+    message: string,
 }
 
 export type BriefingResponse = {
-  error: unknown | null,
+  error: BriefingResponseError | null,
   id: string,
   result: BriefingResponseResultItem[],
 }

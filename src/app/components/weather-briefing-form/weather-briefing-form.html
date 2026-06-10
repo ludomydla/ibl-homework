@@ -1,4 +1,4 @@
-<form [formRoot]="weatherBriefingForm" class="text-3xl flex flex-col">
+<form [formRoot]="weatherBriefingForm" class="text-3xl flex flex-col" novalidate>
     <fieldset>
         <legend>Message types</legend>
 
@@ -12,13 +12,18 @@
         <label for="taf">TAF</label>
     </fieldset>
     
-    <label for="stations">Airports:</label>
-    <input type="text" id="stations" [formField]="weatherBriefingForm.airports">
+    <label for="airports">Airports:</label>
+    <input type="text" id="airports" [formField]="weatherBriefingForm.airports">
 
     <label for="countries">Countries:</label>
     <input type="text" id="countries" [formField]="weatherBriefingForm.countries">
 
-    <button type="submit">Submit</button>
+    @if (weatherBriefingForm().touched()) {
+        @for (error of weatherBriefingForm().errors(); track error.kind) {
+            <p class="text-red-500 text-base">{{ error.message }}</p>
+        }
+    }
 
-    <!-- <p>{{ weatherBriefingForm.value }}</p> -->
+    <button type="submit" [disabled]="weatherBriefingForm().invalid()">Submit</button>
+
 </form>

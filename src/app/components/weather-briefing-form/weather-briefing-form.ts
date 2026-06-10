@@ -1,7 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
-import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required, SchemaPathTree, validateTree } from '@angular/forms/signals';
 import { WeatherBriefingService } from '../../services/weather-briefing';
 import { ReportType } from '../../services/weather-briefing.api';
+import { atLeastOneReportTypeSelected, eitherAirportsOrCountriesRequired } from './validations';
+
+export type WeatherBriefingFormModel = {
+  metar: boolean;
+  sigmet: boolean;
+  taf: boolean;
+  airports: string;
+  countries: string;
+}
 
 @Component({
   selector: 'weather-briefing-form',
@@ -11,7 +20,7 @@ import { ReportType } from '../../services/weather-briefing.api';
 export class WeatherBriefingForm {
   weatherBriefing = inject(WeatherBriefingService);
 
-  weatherBriefingModel = signal({
+  weatherBriefingModel = signal<WeatherBriefingFormModel>({
     metar: false,
     sigmet: false,
     taf: false,
@@ -20,8 +29,8 @@ export class WeatherBriefingForm {
   });
   
   weatherBriefingForm = form(this.weatherBriefingModel, (schemaPath) => {
-    required(schemaPath.airports);
-    required(schemaPath.countries);
+    atLeastOneReportTypeSelected(schemaPath, 'At least 1 message type must be selected');
+    eitherAirportsOrCountriesRequired(schemaPath, 'At least 1 of the following must be entered: airports, countries');
   }, {
     submission: {
       action: async (formObj) => {
