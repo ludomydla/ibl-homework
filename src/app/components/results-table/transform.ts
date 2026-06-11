@@ -25,7 +25,7 @@ function getTagFromSegment(segment: string) {
 
 function getColorFromSegment(segment: string) {
     if(segment.startsWith('FEW') || segment.startsWith('BKN') || segment.startsWith('SCT')) {
-        const numberFromSegment = Number(segment.substring(3, 3))
+        const numberFromSegment = Number(segment.substring(3, 6))
         if(numberFromSegment <= CLOUD_HEIGHT_LIMIT) return BLUE_CLASS
         else return RED_CLASS
     } else return ''

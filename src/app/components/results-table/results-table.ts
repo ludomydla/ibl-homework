@@ -7,6 +7,7 @@ import { transformWeatherBriefingRespToTabular } from './transform';
   selector: 'results-table',
   imports: [DatePipe],
   templateUrl: './results-table.html',
+  styleUrl: './results-table.css',
 })
 export class ResultsTable {
   responseData = input.required<BriefingResponse>();

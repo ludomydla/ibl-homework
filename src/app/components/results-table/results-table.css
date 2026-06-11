@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  border: 1px solid var(--color-gray-400);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 400;
+  font-size: .85em;
+  text-wrap: wrap;
+}
+
+th,
+td {
+  border: 1px solid var(--color-gray-400);
+  padding: 0.25rem 0.25rem;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+
+span {
+    margin-right: .5rem;
+}

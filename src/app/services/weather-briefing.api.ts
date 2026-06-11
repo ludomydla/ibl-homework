@@ -7,8 +7,8 @@ export enum ReportType {
 export type BriefingParams = {
     id: string,
     reportTypes: ReportType[],
-    stations: string[],
-    countries: string[]
+    stations?: string[],
+    countries?: string[]
 }
 
 export type BriefingRequest = {

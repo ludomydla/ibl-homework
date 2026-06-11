@@ -2,18 +2,18 @@
 <table>
     @for(station of tabularData(); track station[0].stationId) {
         <tr>
-            <th colspan="3">{{ station[0].stationId }}</th>
+            <th class="text-left bg-gray-200" colspan="3">{{ station[0].stationId }}</th>
         </tr>
         @for(report of station; track report.queryType) {
             <tr>
-                <td>{{report.queryType}}</td>
+                <td>{{report.queryType.endsWith('LONGTAF') ? 'TAF' : report.queryType}}</td>
                 <td>{{report.reportTime | date:'d.M.yyyy HH:mm:ss':'':'sk-SK'}}</td>
-                <td>
+                <td style="text-indent: 1.5em hanging;">
                     @for (token of report.tokens; track $index) {
                         @if(token.tag === 'span') {
                             <span [class]="token.class">{{ token.text }}</span>
                         } @else {
-                            <br />
+                            <br/>
                         }
                     }
                 </td>

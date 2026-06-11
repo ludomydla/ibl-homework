@@ -1,22 +1,18 @@
-<form [formRoot]="weatherBriefingForm" class="text-3xl flex flex-col" novalidate>
-    <fieldset>
-        <legend>Message types</legend>
-
-        <input type="checkbox" id="metar" [formField]="weatherBriefingForm.metar">
-        <label for="metar">METAR</label>
-
-        <input type="checkbox" id="sigmet" [formField]="weatherBriefingForm.sigmet">
-        <label for="sigmet">SIGMET</label>
-
-        <input type="checkbox" id="taf" [formField]="weatherBriefingForm.taf">
-        <label for="taf">TAF</label>
+<form [formRoot]="weatherBriefingForm" novalidate class="rounded-lg border border-black p-4 mb-4 flex flex-col gap-4" >
+    <fieldset >
+        <div class="flex flex-row flex-wrap">
+            <legend class="w-full md:w-1/4">Message types</legend>
+            <div class="w-full md:w-3/4">
+                <input-checkbox id="metar" label="METAR" [field]="weatherBriefingForm.metar" />
+                <input-checkbox id="sigmet" label="SIGMET" [field]="weatherBriefingForm.sigmet" />
+                <input-checkbox id="taf" label="TAF" [field]="weatherBriefingForm.taf" />
+            </div>
+        </div>
     </fieldset>
     
-    <label for="airports">Airports:</label>
-    <input type="text" id="airports" [formField]="weatherBriefingForm.airports">
+    <input-text id="airports" label="Airports:" [field]="weatherBriefingForm.airports" />
 
-    <label for="countries">Countries:</label>
-    <input type="text" id="countries" [formField]="weatherBriefingForm.countries">
+    <input-text id="countries" label="Countries:" [field]="weatherBriefingForm.countries" />
 
     @if (weatherBriefingForm().touched()) {
         @for (error of weatherBriefingForm().errors(); track error.kind) {
@@ -24,6 +20,6 @@
         }
     }
 
-    <button type="submit" [disabled]="weatherBriefingForm().invalid()">Submit</button>
+    <button type="submit" [disabled]="weatherBriefingForm().invalid()" class="self-center rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 outline-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500">Submit</button>
 
 </form>

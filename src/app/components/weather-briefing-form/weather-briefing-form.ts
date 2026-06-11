@@ -3,6 +3,9 @@ import { form, FormField, FormRoot, required, SchemaPathTree, validateTree } fro
 import { WeatherBriefingService } from '../../services/weather-briefing';
 import { ReportType } from '../../services/weather-briefing.api';
 import { atLeastOneReportTypeSelected, eitherAirportsOrCountriesRequired } from './validations';
+import { InputCheckbox } from '../input-checkbox/input-checkbox';
+import { InputText } from '../input-text/input-text';
+import { buildPayloadFromForm } from './buildPayloadFromForm';
 
 export type WeatherBriefingFormModel = {
   metar: boolean;
@@ -14,7 +17,7 @@ export type WeatherBriefingFormModel = {
 
 @Component({
   selector: 'weather-briefing-form',
-  imports: [FormField, FormRoot],
+  imports: [FormField, FormRoot, InputCheckbox, InputText],
   templateUrl: './weather-briefing-form.html',
 })
 export class WeatherBriefingForm {
@@ -34,23 +37,7 @@ export class WeatherBriefingForm {
   }, {
     submission: {
       action: async (formObj) => {
-        const formValue = formObj().value();
-        const payload = {
-          id: 'query01',
-          method: 'query',
-          params: [
-            {
-              id: 'briefing01', 
-              reportTypes: [
-                ...(formValue.metar ? [ReportType.METAR] : []),
-                ...(formValue.sigmet ? [ReportType.SIGMET] : []),
-                ...(formValue.taf ? [ReportType.TAF] : [])
-              ],        
-              stations: formValue.airports.split(' '),
-              countries: formValue.countries.split(' ')
-            }
-          ]
-        };
+        const payload = buildPayloadFromForm(formObj().value())
         
         this.weatherBriefing.getBriefing(payload);
       }
