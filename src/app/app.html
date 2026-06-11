@@ -1,7 +1,9 @@
 <main class="flex flex-row justify-center">
     <div class="md:w-[768px] w-full bg-slate-200 p-2">
         <weather-briefing-form />
-        @if (weatherBriefingResults(); as result) {
+        @if (weatherBriefingError(); as error) {
+            <error-alert [messages]="error" />
+        } @else if (weatherBriefingResults(); as result) {
             <results-table [responseData]="result" />
         }
     </div>

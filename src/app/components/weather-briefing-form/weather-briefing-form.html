@@ -14,10 +14,8 @@
 
     <input-text id="countries" label="Countries:" [field]="weatherBriefingForm.countries" />
 
-    @if (weatherBriefingForm().touched()) {
-        @for (error of weatherBriefingForm().errors(); track error.kind) {
-            <p class="text-red-500 text-base">{{ error.message }}</p>
-        }
+    @if (weatherBriefingForm().touched() && validationMessages().length) {
+        <error-alert [messages]="validationMessages()" />
     }
 
     <button type="submit" [disabled]="weatherBriefingForm().invalid() || weatherBriefingForm().submitting()" class="self-center inline-flex items-center justify-center gap-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 outline-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500">

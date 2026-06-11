@@ -1,10 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { form, FormField, FormRoot, required, SchemaPathTree, validateTree } from '@angular/forms/signals';
 import { WeatherBriefingService } from '../../services/weather-briefing';
 import { ReportType } from '../../services/weather-briefing.api';
 import { atLeastOneReportTypeSelected, eitherAirportsOrCountriesRequired } from './validations';
 import { InputCheckbox } from '../input-checkbox/input-checkbox';
 import { InputText } from '../input-text/input-text';
+import { ErrorAlert } from '../error-alert/error-alert';
 import { buildPayloadFromForm } from './buildPayloadFromForm';
 
 export type WeatherBriefingFormModel = {
@@ -17,7 +18,7 @@ export type WeatherBriefingFormModel = {
 
 @Component({
   selector: 'weather-briefing-form',
-  imports: [FormField, FormRoot, InputCheckbox, InputText],
+  imports: [FormField, FormRoot, InputCheckbox, InputText, ErrorAlert],
   templateUrl: './weather-briefing-form.html',
 })
 export class WeatherBriefingForm {
@@ -43,5 +44,11 @@ export class WeatherBriefingForm {
       }
     }
   });
+
+  validationMessages = computed(() =>
+    this.weatherBriefingForm().errors()
+      .map((error) => error.message)
+      .filter((message): message is string => !!message),
+  );
 
 }
