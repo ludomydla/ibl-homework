@@ -9,7 +9,7 @@ import { WeatherBriefingService } from './services/weather-briefing';
   selector: 'app-root',
   imports: [RouterOutlet, WeatherBriefingForm, ResultsTable, ErrorAlert],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('ibl-homework');

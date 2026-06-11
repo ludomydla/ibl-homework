@@ -11,5 +11,5 @@ import { transformWeatherBriefingRespToTabular } from './transform';
 })
 export class ResultsTable {
   responseData = input.required<BriefingResponse>();
-  tabularData = computed( () => transformWeatherBriefingRespToTabular(this.responseData()));
+  tabularData = computed(() => transformWeatherBriefingRespToTabular(this.responseData()));
 }

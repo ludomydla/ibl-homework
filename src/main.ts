@@ -6,5 +6,4 @@ import localeSk from '@angular/common/locales/sk';
 
 registerLocaleData(localeSk, 'sk-SK');
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(App, appConfig).catch((err) => console.error(err));
