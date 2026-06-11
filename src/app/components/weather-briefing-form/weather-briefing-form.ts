@@ -23,6 +23,7 @@ export type WeatherBriefingFormModel = {
 })
 export class WeatherBriefingForm {
   weatherBriefing = inject(WeatherBriefingService);
+  submitAttempted = signal(false);
 
   weatherBriefingModel = signal<WeatherBriefingFormModel>({
     metar: false,

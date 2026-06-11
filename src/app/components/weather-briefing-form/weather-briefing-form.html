@@ -1,4 +1,4 @@
-<form [formRoot]="weatherBriefingForm" novalidate class="rounded-lg border border-black p-4 mb-4 flex flex-col gap-4" >
+<form [formRoot]="weatherBriefingForm" (submit)="submitAttempted.set(true)" novalidate class="rounded-lg border border-black p-4 mb-4 flex flex-col gap-4" >
     <fieldset >
         <div class="flex flex-row flex-wrap">
             <legend class="w-full md:w-1/4">Message types</legend>
@@ -14,11 +14,11 @@
 
     <input-text id="countries" label="Countries:" [field]="weatherBriefingForm.countries" />
 
-    @if (weatherBriefingForm().touched() && validationMessages().length) {
+    @if (submitAttempted() && validationMessages().length) {
         <error-alert [messages]="validationMessages()" />
     }
 
-    <button type="submit" [disabled]="weatherBriefingForm().invalid() || weatherBriefingForm().submitting()" class="self-center inline-flex items-center justify-center gap-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 outline-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500">
+    <button type="submit" [disabled]="weatherBriefingForm().submitting()" class="self-center inline-flex items-center justify-center gap-2 rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 outline-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500">
         @if (weatherBriefingForm().submitting()) {
             <span class="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true"></span>
             Submitting…
