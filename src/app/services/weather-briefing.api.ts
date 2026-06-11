@@ -4,7 +4,7 @@ export enum ReportType {
   TAF = 'TAF_LONGTAF',
 }
 
-export type BriefingParams = {
+type BriefingParams = {
   id: string;
   reportTypes: ReportType[];
   stations?: string[];
@@ -17,7 +17,7 @@ export type BriefingRequest = {
   params: BriefingParams[];
 };
 
-export type BriefingResponseResultItemBase = {
+type BriefingResponseResultItemBase = {
   queryType: ReportType;
   receptionTime: Date;
   refs: string[];
@@ -27,18 +27,18 @@ export type BriefingResponseResultItemBase = {
   text: string;
 };
 
-export type BriefingResponseResultItemSIGMET = BriefingResponseResultItemBase & {
+type BriefingResponseResultItemSIGMET = BriefingResponseResultItemBase & {
   validFrom: Date;
   validTo: Date;
 };
 
-export type BriefingResponseResultItemTAF = BriefingResponseResultItemSIGMET & {
+type BriefingResponseResultItemTAF = BriefingResponseResultItemSIGMET & {
   placeId: string;
   revision?: string;
   textHTML: string;
 };
 
-export type BriefingResponseResultItemMETAR = BriefingResponseResultItemBase & {
+type BriefingResponseResultItemMETAR = BriefingResponseResultItemBase & {
   placeId: string;
   revision: string;
   textHTML: string;
@@ -49,16 +49,7 @@ export type BriefingResponseResultItem =
   | BriefingResponseResultItemTAF
   | BriefingResponseResultItemMETAR;
 
-type Token = {
-  tag: string;
-  text: string;
-  color: string;
-};
-export type ExtendedBriefingResponseResultItem = BriefingResponseResultItem & {
-  tokens: Token[];
-};
-
-export type BriefingResponseError = {
+type BriefingResponseError = {
   code: number;
   data?: unknown;
   message: string;

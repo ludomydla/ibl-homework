@@ -1,7 +1,13 @@
-import {
-  BriefingResponse,
-  ExtendedBriefingResponseResultItem,
-} from '../../services/weather-briefing.api';
+import { BriefingResponse, BriefingResponseResultItem } from '../../services/weather-briefing.api';
+
+type Token = {
+  tag: string;
+  text: string;
+  color: string;
+};
+export type ExtendedBriefingResponseResultItem = BriefingResponseResultItem & {
+  tokens: Token[];
+};
 
 const CLOUD_HEIGHT_LIMIT = 30;
 
