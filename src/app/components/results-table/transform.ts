@@ -17,7 +17,6 @@ export function transformWeatherBriefingRespToTabular(responseData: BriefingResp
       result[briefingRow.stationId].push(tokenEnhancedBriefingRow);
     } else result[briefingRow.stationId] = [tokenEnhancedBriefingRow];
   });
-  console.log('result', result);
   return Object.values(result);
 }
 

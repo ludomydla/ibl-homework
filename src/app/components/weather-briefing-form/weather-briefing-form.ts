@@ -5,15 +5,8 @@ import { atLeastOneReportTypeSelected, eitherAirportsOrCountriesRequired } from 
 import { InputCheckbox } from '../input-checkbox/input-checkbox';
 import { InputText } from '../input-text/input-text';
 import { ErrorAlert } from '../error-alert/error-alert';
-import { buildPayloadFromForm } from './buildPayloadFromForm';
-
-export type WeatherBriefingFormModel = {
-  metar: boolean;
-  sigmet: boolean;
-  taf: boolean;
-  airports: string;
-  countries: string;
-};
+import { buildPayloadFromForm } from './build-payload';
+import { WeatherBriefingFormModel } from './weather-briefing-form.model';
 
 @Component({
   selector: 'weather-briefing-form',

@@ -1,5 +1,5 @@
 import { SchemaPathTree, validateTree } from '@angular/forms/signals';
-import { WeatherBriefingFormModel } from './weather-briefing-form';
+import { WeatherBriefingFormModel } from './weather-briefing-form.model';
 
 export function atLeastOneReportTypeSelected(
   schemaPath: SchemaPathTree<WeatherBriefingFormModel>,

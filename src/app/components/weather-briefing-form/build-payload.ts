@@ -1,5 +1,5 @@
 import { BriefingRequest, ReportType } from '../../services/weather-briefing.api';
-import { WeatherBriefingFormModel } from './weather-briefing-form';
+import { WeatherBriefingFormModel } from './weather-briefing-form.model';
 
 const RIA_REQUEST_ID = 'queryLudovitMydla';
 const RIA_REQUEST_METHOD = 'query';
@@ -16,8 +16,8 @@ export function buildPayloadFromForm(formValue: WeatherBriefingFormModel) {
           ...(formValue.sigmet ? [ReportType.SIGMET] : []),
           ...(formValue.taf ? [ReportType.TAF] : []),
         ],
-        stations: formValue.airports ? formValue.airports.toUpperCase().split(' ') : undefined,
-        countries: formValue.countries ? formValue.countries.toUpperCase().split(' ') : undefined,
+        stations: formValue.airports ? formValue.airports.split(' ') : undefined,
+        countries: formValue.countries ? formValue.countries.split(' ') : undefined,
       },
     ],
   };

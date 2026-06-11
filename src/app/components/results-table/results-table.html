@@ -1,9 +1,9 @@
 <table>
   @for (station of tabularData(); track station[0].stationId) {
     <tr>
-      <th class="text-left bg-gray-200" colspan="3">{{ station[0].stationId }}</th>
+      <th class="text-left bg-yellow-100" colspan="3">{{ station[0].stationId }}</th>
     </tr>
-    @for (report of station; track report.queryType) {
+    @for (report of station; track $index) {
       <tr>
         <td>{{ report.queryType.endsWith('LONGTAF') ? 'TAF' : report.queryType }}</td>
         <td>{{ report.reportTime | date: 'd.M.yyyy HH:mm:ss' : '' : 'sk-SK' }}</td>

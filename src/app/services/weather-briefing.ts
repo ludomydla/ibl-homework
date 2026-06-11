@@ -11,26 +11,29 @@ const API_URL = 'https://ogcie.iblsoft.com/ria/opmetquery';
 export class WeatherBriefingService {
   private http = inject(HttpClient);
 
-  responseData = signal<BriefingResponse | null>(null);
-  errorMessage = signal<string | null>(null);
+  private readonly _responseData = signal<BriefingResponse | null>(null);
+  private readonly _errorMessage = signal<string | null>(null);
+
+  readonly responseData = this._responseData.asReadonly();
+  readonly errorMessage = this._errorMessage.asReadonly();
 
   async getBriefing(payload: BriefingRequest): Promise<void> {
-    this.errorMessage.set(null);
+    this._errorMessage.set(null);
     try {
       const response = await firstValueFrom(this.http.post<BriefingResponse>(API_URL, payload));
       if (response.error) {
         this.failWith(response.error.message || 'The weather briefing request failed.');
         return;
       }
-      this.responseData.set(response);
+      this._responseData.set(response);
     } catch (err) {
       this.failWith(this.describeHttpError(err));
     }
   }
 
   private failWith(message: string): void {
-    this.errorMessage.set(message);
-    this.responseData.set(null); // clear stale results — only the error shows
+    this._errorMessage.set(message);
+    this._responseData.set(null); // clear stale results — only the error shows
   }
 
   private describeHttpError(err: unknown): string {
