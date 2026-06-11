@@ -10,7 +10,7 @@
         <td style="text-indent: 1.5em hanging">
           @for (token of report.tokens; track $index) {
             @if (token.tag === 'span') {
-              <span [class]="token.class">{{ token.text }}</span>
+              <span [class]="mapColorToClass(token.color)">{{ token.text }}</span>
             } @else {
               <br />
             }

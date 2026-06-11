@@ -52,7 +52,7 @@ export type BriefingResponseResultItem =
 type Token = {
   tag: string;
   text: string;
-  class: string;
+  color: string;
 };
 export type ExtendedBriefingResponseResultItem = BriefingResponseResultItem & {
   tokens: Token[];
