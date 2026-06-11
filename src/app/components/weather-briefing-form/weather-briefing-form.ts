@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { form, FormField, FormRoot, required, SchemaPathTree, validateTree } from '@angular/forms/signals';
+import { form, FormField, FormRoot, pattern, required, SchemaPathTree, validateTree } from '@angular/forms/signals';
 import { WeatherBriefingService } from '../../services/weather-briefing';
 import { ReportType } from '../../services/weather-briefing.api';
 import { atLeastOneReportTypeSelected, eitherAirportsOrCountriesRequired } from './validations';
@@ -34,8 +34,10 @@ export class WeatherBriefingForm {
   });
   
   weatherBriefingForm = form(this.weatherBriefingModel, (schemaPath) => {
-    atLeastOneReportTypeSelected(schemaPath, 'At least 1 message type must be selected');
-    eitherAirportsOrCountriesRequired(schemaPath, 'At least 1 of the following must be entered: airports, countries');
+    pattern(schemaPath.airports, /^([A-Z]{4} )*[A-Z]{4}$/, {message: 'ICAO airport codes must be 4 uppercase letters separated by spaces'});
+    pattern(schemaPath.countries, /^([A-Z]{2} )*[A-Z]{2}$/, {message: 'WMO country codes must be 2 uppercase letters separated by spaces'});
+    atLeastOneReportTypeSelected(schemaPath, 'At least 1 Message type must be selected');
+    eitherAirportsOrCountriesRequired(schemaPath, 'Enter at least one airport ICAO code or one country WMO code');
   }, {
     submission: {
       action: async (formObj) => {
@@ -47,7 +49,7 @@ export class WeatherBriefingForm {
   });
 
   validationMessages = computed(() =>
-    this.weatherBriefingForm().errors()
+    this.weatherBriefingForm().errorSummary()
       .map((error) => error.message)
       .filter((message): message is string => !!message),
   );
