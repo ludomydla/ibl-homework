@@ -38,8 +38,8 @@ export class WeatherBriefingForm {
     submission: {
       action: async (formObj) => {
         const payload = buildPayloadFromForm(formObj().value())
-        
-        this.weatherBriefing.getBriefing(payload);
+
+        await this.weatherBriefing.getBriefing(payload);
       }
     }
   });
