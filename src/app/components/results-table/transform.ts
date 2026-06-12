@@ -24,20 +24,21 @@ export function transformWeatherBriefingRespToTabular(responseData: BriefingResp
   return Object.values(result);
 }
 
-function getTagFromSegment(segment: string) {
+export function getTagFromSegment(segment: string) {
   if (segment === '\r\r\n') return 'br';
   else return 'span';
 }
 
-function getColorFromSegment(segment: string) {
+export function getColorFromSegment(segment: string) {
   if (segment.startsWith('FEW') || segment.startsWith('BKN') || segment.startsWith('SCT')) {
     const numberFromSegment = Number(segment.substring(3, 6));
+    if (isNaN(numberFromSegment)) return '';
     if (numberFromSegment <= CLOUD_HEIGHT_LIMIT) return 'blue';
     else return 'red';
   } else return '';
 }
 
-function tokenizeReportText(text: string) {
+export function tokenizeReportText(text: string) {
   const segments = text.replaceAll('\r\r\n', ' \r\r\n ').trim().split(' ');
   return segments
     .filter((segment) => segment !== '')
